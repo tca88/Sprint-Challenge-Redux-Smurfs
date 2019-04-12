@@ -17,3 +17,23 @@ export const FETCH_SMURFS_FAILURE = "FETCH_SMURFS_FAILURE";
    U - updateSmurf
    D - deleteSmurf
 */
+
+export const getSumrfs = () => dispatch => {
+  // when making async calls, you first dispatch a start action, then start the API call.
+  dispatch({ type: FETCH_SMURFS_START });
+  axios
+    .get("http://localhost:3333/smurfs")
+    .then(res => {
+      dispatch({
+        type: FETCH_SMURFS_SUCCESS,
+        payload: res.data
+      });
+      // console.log("lookie", res);
+    })
+    .catch(err => {
+      dispatch({
+        type: FETCH_SMURFS_FAILURE,
+        payload: err
+      });
+    });
+};
