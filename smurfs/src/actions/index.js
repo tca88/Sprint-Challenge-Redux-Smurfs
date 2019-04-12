@@ -18,7 +18,7 @@ export const FETCH_SMURFS_FAILURE = "FETCH_SMURFS_FAILURE";
    D - deleteSmurf
 */
 
-export const getSumrfs = () => dispatch => {
+export const getSmurfs = () => dispatch => {
   // when making async calls, you first dispatch a start action, then start the API call.
   dispatch({ type: FETCH_SMURFS_START });
   axios
@@ -28,7 +28,7 @@ export const getSumrfs = () => dispatch => {
         type: FETCH_SMURFS_SUCCESS,
         payload: res.data
       });
-      // console.log("lookie", res);
+      console.log("lookie", res.data);
     })
     .catch(err => {
       dispatch({

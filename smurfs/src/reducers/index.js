@@ -34,7 +34,7 @@ const initialState = {
   isFetching: false,
   smurf: {}
 };
-export const smurfsReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   console.log("reducer", action);
   switch (action.type) {
     case FETCH_SMURFS_START:
@@ -48,7 +48,7 @@ export const smurfsReducer = (state = initialState, action) => {
         ...state,
         error: "",
         isFetching: false,
-        characters: action.payload
+        smurfs: action.payload
       };
     case FETCH_SMURFS_FAILURE:
       return {
