@@ -19,9 +19,20 @@ import "./App.css";
  `How do I ensure that my component links the state to props?`
  */
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      activeSmurf: []
+    };
+  }
   componentDidMount() {
     return this.props.getSmurfs();
   }
+
+  setActiveSmurf = smurf => {
+    this.setState({ activeSmurf: smurf });
+  };
+
   render() {
     if (this.props.isFetching) {
       console.log("data is being fetched!");
@@ -41,7 +52,7 @@ class App extends Component {
               <Smurf
                 {...props}
                 smurfs={this.props.smurfs}
-                activeSmurf={this.props.activeSmurf}
+                setActiveSmurf={this.setActiveSmurf}
               />
             )}
           />

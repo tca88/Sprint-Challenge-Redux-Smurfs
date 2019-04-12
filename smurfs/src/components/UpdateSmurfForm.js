@@ -6,13 +6,10 @@ class UpdateSmurfForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      smurf: {
-        name: "",
-        age: "",
-        height: ""
-      }
+      smurf: this.props.activeSmurf
     };
   }
+
   handleChange = e => {
     e.persist();
     console.log(this.state.smurf);
@@ -24,46 +21,36 @@ class UpdateSmurfForm extends Component {
     });
   };
 
-  addSmurf = e => {
+  updateSmurf = e => {
     e.preventDefault();
-
-    this.props.addSmurf(this.state.smurf);
-
-    this.setState({
-      smurf: {
-        name: "",
-        age: 0,
-        height: ""
-      }
-    });
-    this.props.history.push("/");
+    this.props.updateSmurf(this.state.smurf);
   };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.addSmurf}>
+        <form onSubmit={this.updateSmurf}>
           <div>
             <input
               type="text"
               name="name"
-              placeholder="Add a new Smurf"
+              placeholder="name"
               onChange={this.handleChange}
-              value={this.state.name}
+              value={this.state.smurf.name}
             />
             <input
               type="number"
               name="age"
               placeholder="Age"
               onChange={this.handleChange}
-              value={this.state.age}
+              value={this.state.smurf.age}
             />
             <input
               type="text"
               name="height"
               placeholder="Height"
               onChange={this.handleChange}
-              value={this.state.height}
+              value={this.state.smurf.height}
             />
           </div>
           <button className="submit" type="submit">

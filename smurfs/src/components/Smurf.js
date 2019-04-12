@@ -12,7 +12,7 @@ function Smurf(props) {
 
   const updateSmurf = e => {
     e.preventDefault();
-    props.updateSmurf(smurf);
+    props.setActiveSmurf(smurf);
     props.history.push("/update-smurf");
   };
 
