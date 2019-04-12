@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import Smurfs from "../components/Smurfs";
 import Smurf from "../components/Smurf";
+import AddSmurfForm from "../components/AddSmurfForm";
+import UpdateSmurfForm from "../components/UpdateSmurfForm";
 import { connect } from "react-redux";
 import { getSmurfs } from "../actions";
 import "./App.css";
@@ -35,7 +37,29 @@ class App extends Component {
           />
           <Route
             path="/smurfs/:name"
-            render={props => <Smurf {...props} smurfs={this.props.smurfs} />}
+            render={props => (
+              <Smurf
+                {...props}
+                smurfs={this.props.smurfs}
+                activeSmurf={this.props.activeSmurf}
+              />
+            )}
+          />
+          <Route
+            path="/add-smurf"
+            render={props => (
+              <AddSmurfForm {...props} smurfs={this.props.smurfs} />
+            )}
+          />
+          <Route
+            path="/update-smurf"
+            render={props => (
+              <UpdateSmurfForm
+                {...props}
+                smurfs={this.props.smurfs}
+                activeSmurf={this.props.activeSmurf}
+              />
+            )}
           />
         </div>
       </Router>
@@ -47,7 +71,9 @@ const mapStateToProps = state => {
   return {
     smurfs: state.smurfs,
     error: state.error,
-    isFetching: state.isFetching
+    isFetching: state.isFetching,
+    smurf: state.smurf,
+    activeSmurf: state.activeSmurf
   };
 };
 

@@ -37,3 +37,61 @@ export const getSmurfs = () => dispatch => {
       });
     });
 };
+
+export const ADD_SMURF_START = "ADD_DATA_START";
+export const ADD_SMURF_SUCCESS = "ADD_DATA_SUCCESS";
+export const ADD_SMURF_FAILURE = "ADD_DATA_FAILURE";
+export const addSmurf = newSmurf => dispatch => {
+  console.log("newnew", newSmurf);
+  dispatch({ type: ADD_SMURF_START });
+  axios
+    .post("http://localhost:3333/smurfs", newSmurf)
+    .then(res => {
+      console.log("look", res);
+      return dispatch({
+        type: ADD_SMURF_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_SMURF_FAILURE, payload: err.response });
+    });
+};
+
+export const DELETE_SMURF_START = "DELETE_SMURF_START";
+export const DELETE_SMURF_SUCCESS = "DELETE_SMURF_SUCCESS";
+export const DELETE_SMURF_FAILURE = "DELETE_SMURF_FAILURE";
+export const deleteSmurf = id => dispatch => {
+  dispatch({ type: DELETE_SMURF_START });
+  axios
+    .delete(`http://localhost:3333/smurfs/${id}`)
+    .then(res => {
+      console.log("look", res);
+      return dispatch({
+        type: DELETE_SMURF_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_SMURF_FAILURE, payload: err.response });
+    });
+};
+
+export const UPDATE_SMURF_START = "UPDATE_SMURF_START";
+export const UPDATE_SMURF_SUCCESS = "UPDATE_SMURF_SUCCESS";
+export const UPDATE_SMURF_FAILURE = "UPDATE_SMURF_FAILURE";
+export const updateSmurf = updatedSmurf => dispatch => {
+  dispatch({ type: UPDATE_SMURF_START });
+  axios
+    .delete(`http://localhost:3333/smurfs/${updatedSmurf.id}`, updatedSmurf)
+    .then(res => {
+      console.log("look", res);
+      return dispatch({
+        type: UPDATE_SMURF_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_SMURF_FAILURE, payload: err.response });
+    });
+};

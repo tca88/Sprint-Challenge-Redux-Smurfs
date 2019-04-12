@@ -25,14 +25,24 @@
 import {
   FETCH_SMURFS_START,
   FETCH_SMURFS_SUCCESS,
-  FETCH_SMURFS_FAILURE
+  FETCH_SMURFS_FAILURE,
+  ADD_SMURF_START,
+  ADD_SMURF_SUCCESS,
+  ADD_SMURF_FAILURE,
+  DELETE_SMURF_START,
+  DELETE_SMURF_SUCCESS,
+  DELETE_SMURF_FAILURE,
+  UPDATE_SMURF_START,
+  UPDATE_SMURF_SUCCESS,
+  UPDATE_SMURF_FAILURE
 } from "../actions";
 
 const initialState = {
   smurfs: [],
   error: "",
   isFetching: false,
-  smurf: {}
+  smurf: {},
+  activeSmurf: {}
 };
 export default (state = initialState, action) => {
   console.log("reducer", action);
@@ -55,6 +65,21 @@ export default (state = initialState, action) => {
         ...state,
         error: "Oh no! error!",
         isFetching: true
+      };
+    case ADD_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload
+      };
+    case DELETE_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload
+      };
+    case UPDATE_SMURF_SUCCESS:
+      return {
+        ...state,
+        activeSmurf: action.payload
       };
     default:
       return state;
