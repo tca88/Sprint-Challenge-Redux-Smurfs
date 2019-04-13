@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteSmurf } from "../actions";
-import { updateSmurf } from "../actions";
 
 function Smurf(props) {
   console.log("Smurfs: ", props.smurfs);
@@ -10,10 +9,13 @@ function Smurf(props) {
   );
   if (!smurf) return <h3>Loading data...</h3>;
 
-  const updateSmurf = e => {
+  console.log("Smurfy1", smurf);
+
+  const updateSmurf = (e, smurf) => {
     e.preventDefault();
+    console.log("Smurfy2", smurf);
     props.setActiveSmurf(smurf);
-    props.history.push("/update-smurf");
+    props.history.push(`/update-smurf/${smurf.name}`);
   };
 
   const deleteSmurf = e => {
@@ -29,7 +31,7 @@ function Smurf(props) {
       <p>{smurf.age}</p>
       <p>{smurf.height}</p>
       <button onClick={deleteSmurf}>Delete Smurf</button>
-      <button onClick={updateSmurf}>Update Smurf</button>
+      <button onClick={e => updateSmurf(e, smurf)}>Update Smurf</button>
     </div>
   );
 }

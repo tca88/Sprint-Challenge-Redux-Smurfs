@@ -83,7 +83,7 @@ export const UPDATE_SMURF_FAILURE = "UPDATE_SMURF_FAILURE";
 export const updateSmurf = updatedSmurf => dispatch => {
   dispatch({ type: UPDATE_SMURF_START });
   axios
-    .delete(`http://localhost:3333/smurfs/${updatedSmurf.id}`, updatedSmurf)
+    .put(`http://localhost:3333/smurfs/${updatedSmurf.id}`, updatedSmurf)
     .then(res => {
       console.log("look", res);
       return dispatch({
@@ -94,4 +94,10 @@ export const updateSmurf = updatedSmurf => dispatch => {
     .catch(err => {
       dispatch({ type: UPDATE_SMURF_FAILURE, payload: err.response });
     });
+};
+
+export const SET_ACTIVE_SMURF = "SET_ACTIVE_SMURF";
+export const setActiveSmurf = smurf => {
+  console.log("Smurf Data:", smurf);
+  return { type: SET_ACTIVE_SMURF, payload: smurf };
 };

@@ -23,8 +23,22 @@ In this challenge, you are to build the Smurfs village once again, only this tim
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+  **Answer**
+
+  Actions send payloads of data to the main store of an application from your application. They describe what happened. Reducers specify how the application's state changes in response to actions sent to the store. In essence, the store is what brings both of these pieces together in one centralized location. Store is the single source of truth because this is the single process for information to be removed and added to a site.
+
 - [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
-- [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+  **Answer**
+
+  Application state is the "global" state that all components in the component tree can access. Component state state is state that is local to a single component and cannot be seen outside of this component. Component states are good when you're working with functionality specific to the component, while application states are good when data needs to be passed across multiple components.
+
+* [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+  **Answer**
+
+  Redux Thunk is a middleware that lets developers call action creators that return a function instead of an action object. Also, by default, actions in Redux are dipatched synchronously, which is not ideal when trying to communicate to an API, so redux thunk is a middleware that allows for asynchronous actions.
 
 ## Project Set Up
 
@@ -80,9 +94,9 @@ return dispatch => {
 ```js
 [
   {
-    name: 'Brainey',
+    name: "Brainey",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 0
   }
 ];
@@ -113,15 +127,15 @@ Example of object created in Smurf DB:
 ```js
 [
   {
-    name: 'Brainey',
+    name: "Brainey",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 0
   },
   {
-    name: 'Sleepy',
+    name: "Sleepy",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 1
   }
 ];
@@ -173,9 +187,9 @@ Example:
 ```js
 output: [
   {
-    name: 'Sleepy',
+    name: "Sleepy",
     age: 200,
-    height: '5cm',
+    height: "5cm",
     id: 1
   }
 ];

@@ -34,15 +34,15 @@ import {
   DELETE_SMURF_FAILURE,
   UPDATE_SMURF_START,
   UPDATE_SMURF_SUCCESS,
-  UPDATE_SMURF_FAILURE
+  UPDATE_SMURF_FAILURE,
+  SET_ACTIVE_SMURF
 } from "../actions";
 
 const initialState = {
   smurfs: [],
   error: "",
   isFetching: false,
-  smurf: {},
-  activeSmurf: {}
+  smurf: {}
 };
 export default (state = initialState, action) => {
   console.log("reducer", action);
@@ -64,7 +64,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: "Oh no! error!",
-        isFetching: true
+        isFetching: false
       };
     case ADD_SMURF_SUCCESS:
       return {
@@ -79,7 +79,12 @@ export default (state = initialState, action) => {
     case UPDATE_SMURF_SUCCESS:
       return {
         ...state,
-        activeSmurf: action.payload
+        smurfs: action.payload
+      };
+    case SET_ACTIVE_SMURF:
+      return {
+        ...state,
+        smurf: action.payload
       };
     default:
       return state;

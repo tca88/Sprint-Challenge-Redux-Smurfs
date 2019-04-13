@@ -3,16 +3,16 @@ import { connect } from "react-redux";
 import { updateSmurf } from "../actions";
 
 class UpdateSmurfForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      smurf: this.props.activeSmurf
-    };
-  }
-
+  state = {
+    smurf: {
+      name: "",
+      age: "",
+      height: ""
+    }
+  };
   handleChange = e => {
     e.persist();
-    console.log(this.state.smurf);
+    console.log(this.props.smurf);
     this.setState({
       smurf: {
         ...this.state.smurf,
@@ -21,12 +21,20 @@ class UpdateSmurfForm extends Component {
     });
   };
 
+  componentDidMount() {
+    this.setState({
+      smurf: this.props.smurf
+    });
+  }
+
   updateSmurf = e => {
     e.preventDefault();
     this.props.updateSmurf(this.state.smurf);
   };
 
   render() {
+    // console.log("UOOUO", this.props.smurfs);
+    if (!this.state.smurf) return <div>loading</div>;
     return (
       <div>
         <form onSubmit={this.updateSmurf}>

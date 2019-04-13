@@ -23,6 +23,20 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+nav {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+.nav-item {
+  font-size: 12px;
+  margin-right: 1rem;
+  font-weight: bold;
 }

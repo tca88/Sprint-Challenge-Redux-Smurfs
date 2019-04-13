@@ -10,7 +10,7 @@ import Smurf from "../components/Smurf";
 import AddSmurfForm from "../components/AddSmurfForm";
 import UpdateSmurfForm from "../components/UpdateSmurfForm";
 import { connect } from "react-redux";
-import { getSmurfs } from "../actions";
+import { getSmurfs, setActiveSmurf } from "../actions";
 import "./App.css";
 /*
  to wire this component up you're going to need a few things.
@@ -21,16 +21,15 @@ import "./App.css";
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      activeSmurf: []
-    };
+    this.state = {};
   }
   componentDidMount() {
     return this.props.getSmurfs();
   }
 
   setActiveSmurf = smurf => {
-    this.setState({ activeSmurf: smurf });
+    console.log("Initial Smurf", smurf);
+    return this.props.setActiveSmurf(smurf);
   };
 
   render() {
@@ -41,6 +40,14 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <nav>
+            <NavLink className="nav-item" to="/add-smurf">
+              Add Smurf
+            </NavLink>
+            <NavLink className="nav-item" exact to="/">
+              Home
+            </NavLink>
+          </nav>
           <Route
             exact
             path="/"
@@ -62,15 +69,10 @@ class App extends Component {
               <AddSmurfForm {...props} smurfs={this.props.smurfs} />
             )}
           />
+
           <Route
-            path="/update-smurf"
-            render={props => (
-              <UpdateSmurfForm
-                {...props}
-                smurfs={this.props.smurfs}
-                activeSmurf={this.props.activeSmurf}
-              />
-            )}
+            path="/update-smurf/:name"
+            render={p => <UpdateSmurfForm {...p} smurf={this.props.smurf} />}
           />
         </div>
       </Router>
@@ -79,12 +81,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("why", state);
   return {
     smurfs: state.smurfs,
     error: state.error,
     isFetching: state.isFetching,
-    smurf: state.smurf,
-    activeSmurf: state.activeSmurf
+    smurf: state.smurf
   };
 };
 
@@ -94,6 +96,7 @@ export default connect(
   mapStateToProps,
   {
     /* action creators go here */
-    getSmurfs
+    getSmurfs,
+    setActiveSmurf
   }
 )(App);
